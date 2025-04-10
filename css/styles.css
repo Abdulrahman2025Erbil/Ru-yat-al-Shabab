@@ -4,11 +4,12 @@
 :root {
     --primary-color: #1e88e5;
     --morning-color: #4fc3f7;
-    --evening-color: #ff9800;
+    --evening-color-1: #7986cb; /* تم تغيير لون الجلسة المسائية للأول إلى أزرق مريح */
+    --evening-color-2: #80cbc4; /* تم تغيير لون الجلسة المسائية للثاني إلى أخضر فاتح مريح */
     --light-bg: #f5f5f5;
     --dark-text: #333;
     --light-text: #fff;
-    --border-radius: 8px;
+    --border-radius: 10px;
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
@@ -43,6 +44,7 @@ header h1 {
     color: #2196f3;
     margin-bottom: 10px;
     font-size: 2.2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .date {
@@ -71,6 +73,7 @@ header h1 {
     align-items: center;
     gap: 8px;
     transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .btn i {
@@ -102,6 +105,11 @@ header h1 {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* بطاقات الجلسات */
 .sessions-grid {
     display: grid;
@@ -116,6 +124,7 @@ header h1 {
     overflow: hidden;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    position: relative;
 }
 
 .session-card:hover {
@@ -135,8 +144,12 @@ header h1 {
     background-color: var(--morning-color);
 }
 
-.evening .session-header {
-    background-color: var(--evening-color);
+.evening-1 .session-header {
+    background-color: var(--evening-color-1);
+}
+
+.evening-2 .session-header {
+    background-color: var(--evening-color-2);
 }
 
 .icon-container {
@@ -147,6 +160,12 @@ header h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: var(--transition);
+}
+
+.session-card:hover .icon-container {
+    transform: rotate(360deg);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .session-header h2 {
@@ -160,12 +179,114 @@ header h1 {
     text-align: center;
 }
 
+.session-footer {
+    padding: 10px 20px 20px;
+    text-align: center;
+}
+
+.details-btn {
+    background: none;
+    border: none;
+    color: #2196f3;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 auto;
+    transition: var(--transition);
+}
+
+.details-btn:hover {
+    color: #0d47a1;
+}
+
+.details-btn:hover i {
+    transform: translateX(-5px);
+}
+
+.details-btn i {
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+/* النافذة المنبثقة */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+    transition: var(--transition);
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.close-btn {
+    background-color: #f44336;
+    padding: 8px 15px;
+    margin: 0 auto;
+    display: inline-flex;
+}
+
 /* الفوتر */
 footer {
     text-align: center;
     margin-top: 40px;
     color: #666;
     font-size: 0.9rem;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* تأثيرات التحميل والحركة */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.session-card.active-card {
+    animation: pulse 2s infinite;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* التجاوب مع الشاشات الصغيرة */
@@ -186,5 +307,10 @@ footer {
     
     .sessions-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 15px;
     }
 }
