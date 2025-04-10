@@ -1,82 +1,63 @@
+// عندما يتم تحميل المستند بالكامل
 document.addEventListener('DOMContentLoaded', function() {
-    // Password validation functionality
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <h3>يرجى إدخال كلمة المرور</h3>
-            <input type="password" id="password-input" placeholder="كلمة المرور">
-            <div class="modal-buttons">
-                <button class="modal-btn submit" id="submit-password">تأكيد</button>
-                <button class="modal-btn cancel" id="cancel-password">إلغاء</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
+    // تحديد عناصر النموذج
+    const modal = document.getElementById('passwordModal');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitButton = document.getElementById('submitPassword');
+    const cancelButton = document.getElementById('cancelPassword');
+    
+    let targetUrl = '';
 
-    // Variables to store the URL
-    let currentUrl = '';
-
-    // Function to show the password modal
+    // دالة لعرض نموذج كلمة المرور
     window.passwordPrompt = function(url) {
-        currentUrl = url;
-        modal.classList.add('show');
-        document.getElementById('password-input').focus();
-        return false;
+        targetUrl = url;
+        modal.style.display = 'flex';
+        passwordInput.value = '';
+        passwordInput.focus();
     };
 
-    // Function to hide the modal
-    function hideModal() {
-        modal.classList.remove('show');
-        document.getElementById('password-input').value = '';
+    // دالة للتحقق من كلمة المرور
+    function checkPassword() {
+        const password = passwordInput.value.trim();
+        if (password === '2025') {
+            modal.style.display = 'none';
+            // فتح الرابط في نافذة جديدة
+            window.open(targetUrl, '_blank');
+        } else {
+            alert('كلمة المرور غير صحيحة!');
+            passwordInput.value = '';
+            passwordInput.focus();
+        }
     }
 
-    // Handle submit button click
-    document.getElementById('submit-password').addEventListener('click', function() {
-        const password = document.getElementById('password-input').value;
-        if (password === '2025') {
-            hideModal();
-            window.open(currentUrl, '_blank');
-        } else {
-            alert('كلمة المرور غير صحيحة');
+    // إغلاق النموذج
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // معالجة النقر على زر التأكيد
+    submitButton.addEventListener('click', checkPassword);
+
+    // معالجة النقر على زر الإلغاء
+    cancelButton.addEventListener('click', closeModal);
+
+    // معالجة الضغط على زر Enter في حقل كلمة المرور
+    passwordInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            checkPassword();
         }
     });
 
-    // Handle cancel button click
-    document.getElementById('cancel-password').addEventListener('click', hideModal);
-
-    // Handle Enter key press in password input
-    document.getElementById('password-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            document.getElementById('submit-password').click();
+    // إغلاق النموذج عند النقر خارجه
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
         }
     });
 
-    // Close the modal when clicking outside
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            hideModal();
-        }
+    // تأثيرات تحميل تدريجي للصفحة
+    const elements = document.querySelectorAll('.session-card');
+    elements.forEach((element, index) => {
+        element.style.animationDelay = `${0.2 + (index * 0.1)}s`;
     });
-
-    // Animation effects for page elements
-    const animateElements = document.querySelectorAll('.btn, .session-card');
-    
-    animateElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-    });
-
-    // Staggered animation on page load
-    setTimeout(() => {
-        let delay = 100;
-        animateElements.forEach(element => {
-            setTimeout(() => {
-                element.style.transition = 'all 0.5s ease';
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, delay);
-            delay += 100;
-        });
-    }, 300);
 });
