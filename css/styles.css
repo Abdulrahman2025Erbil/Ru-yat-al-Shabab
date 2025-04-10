@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
 
+:root {
+    --primary-color: #4e54c8;
+    --secondary-color: #9733ee;
+    --success-color: #0abf53;
+    --danger-color: #e74c3c;
+    --info-color: #20b2aa;
+    --sunrise-gradient: linear-gradient(135deg, #56ccf2, #3498db);
+    --sunset-gradient: linear-gradient(135deg, #ffb347, #ffcc33);
+    --morning-gradient: linear-gradient(135deg, #43cea2, #185a9d);
+    --evening-gradient: linear-gradient(135deg, #ff9966, #ff5e62);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -50,18 +62,18 @@ h1 {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 12px 25px;
+    border-radius: 50px;
     text-decoration: none;
     color: white;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
 }
 
 .btn:active {
@@ -69,74 +81,77 @@ h1 {
 }
 
 .primary {
-    background-color: #4e54c8;
+    background: linear-gradient(45deg, var(--primary-color), #8f94fb);
+}
+
+.secondary {
+    background: linear-gradient(45deg, var(--secondary-color), #da22ff);
 }
 
 .success {
-    background-color: #0abf53;
-}
-
-.purple {
-    background-color: #9733ee;
+    background: linear-gradient(45deg, var(--success-color), #6deca9);
 }
 
 .danger {
-    background-color: #e74c3c;
+    background: linear-gradient(45deg, var(--danger-color), #f39c12);
 }
 
 .info {
-    background-color: #20b2aa;
+    background: linear-gradient(45deg, var(--info-color), #4fc3f7);
 }
 
 .sessions-grid {
-    margin-bottom: 30px;
-}
-
-.sessions-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .session-card {
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 160px;
+    min-height: 180px;
     border-radius: 15px;
     overflow: hidden;
     text-decoration: none;
     color: white;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 25px;
 }
 
 .session-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.blue {
-    background-color: #56ccf2;
+.sunrise {
+    background: var(--sunrise-gradient);
 }
 
-.orange {
-    background-color: #ffb347;
+.sunset {
+    background: var(--sunset-gradient);
 }
 
-.teal {
-    background-color: #43cea2;
+.morning {
+    background: var(--morning-gradient);
 }
 
-.yellow {
-    background-color: #f9ca24;
+.evening {
+    background: var(--evening-gradient);
 }
 
 .session-icon {
-    margin-bottom: 12px;
-    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
 }
 
 .session-content {
@@ -144,13 +159,13 @@ h1 {
 }
 
 .session-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
     font-weight: 700;
 }
 
 .session-card p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     opacity: 0.9;
 }
 
@@ -246,16 +261,16 @@ footer { animation-delay: 0.8s; }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .sessions-row {
-        flex-direction: column;
-    }
-    
     .top-buttons, .resources-buttons {
         flex-direction: column;
     }
     
     .btn {
         width: 100%;
+    }
+    
+    .sessions-grid {
+        grid-template-columns: 1fr;
     }
     
     h1 {
