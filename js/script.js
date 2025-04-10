@@ -1,57 +1,71 @@
-// عندما يتم تحميل المستند بالكامل
+// انتظر حتى يتم تحميل المستند
 document.addEventListener('DOMContentLoaded', function() {
-    // تحديد عناصر النموذج
-    const modal = document.getElementById('passwordModal');
-    const passwordInput = document.getElementById('passwordInput');
-    const submitButton = document.getElementById('submitPassword');
-    const cancelButton = document.getElementById('cancelPassword');
+    // إضافة تأثيرات للأزرار
+    const buttons = document.querySelectorAll('.btn');
     
-    let targetUrl = '';
-
-    // دالة لعرض نموذج كلمة المرور
-    window.passwordPrompt = function(url) {
-        targetUrl = url;
-        modal.style.display = 'flex';
-        passwordInput.value = '';
-        passwordInput.focus();
-    };
-
-    // دالة للتحقق من كلمة المرور
-    function checkPassword() {
-        const password = passwordInput.value.trim();
-        if (password === '2025') {
-            modal.style.display = 'none';
-            // فتح الرابط في نافذة جديدة
-            window.open(targetUrl, '_blank');
-        } else {
-            alert('كلمة المرور غير صحيحة!');
-            passwordInput.value = '';
-            passwordInput.focus();
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // إضافة تأثير النقر
+            this.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+            
+            // تنفيذ الإجراء المناسب حسب الزر
+            handleButtonClick(this);
+        });
+    });
+    
+    // إضافة تأثيرات للبطاقات
+    const sessionCards = document.querySelectorAll('.session-card');
+    
+    sessionCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // إضافة تأثير النقر على البطاقات
+            this.style.transform = 'scale(0.98)';
+            
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+            
+            // يمكن إضافة وظائف لعرض تفاصيل الجلسة هنا
+            showSessionDetails(this);
+        });
+    });
+    
+    // تنفيذ إجراءات مختلفة حسب الزر المنقور
+    function handleButtonClick(button) {
+        if (button.classList.contains('agenda')) {
+            alert('سيتم فتح جدول الأعمال التفصيلي للفعالية');
+        } else if (button.classList.contains('post-assessment')) {
+            alert('سيتم فتح نموذج الاختبار البعدي');
+        } else if (button.classList.contains('pre-assessment')) {
+            alert('سيتم فتح نموذج الاختبار القبلي');
+        } else if (button.classList.contains('video-resources')) {
+            alert('سيتم فتح موارد الفيديو المتعلقة بالفعالية');
+        } else if (button.classList.contains('text-resources')) {
+            alert('سيتم فتح المصادر والمراجع المتعلقة بالفعالية');
         }
     }
-
-    // إغلاق النموذج
-    function closeModal() {
-        modal.style.display = 'none';
+    
+    // عرض تفاصيل الجلسة
+    function showSessionDetails(card) {
+        const sessionTitle = card.querySelector('h2').textContent;
+        const sessionContent = card.querySelector('.session-content').textContent;
+        
+        console.log(`تم النقر على: ${sessionTitle}`);
+        console.log(`محتوى الجلسة: ${sessionContent}`);
+        
+        // يمكن هنا إضافة شيفرة لعرض مزيد من التفاصيل في نافذة منبثقة أو قسم مخصص
     }
-
-    // معالجة النقر على زر التأكيد
-    submitButton.addEventListener('click', checkPassword);
-
-    // معالجة النقر على زر الإلغاء
-    cancelButton.addEventListener('click', closeModal);
-
-    // معالجة الضغط على زر Enter في حقل كلمة المرور
-    passwordInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            checkPassword();
-        }
-    });
-
-    // إغلاق النموذج عند النقر خارجه
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
+    
+    // إضافة تأثير تحميل للصفحة
+    const container = document.querySelector('.container');
+    container.style.opacity = '0';
+    
+    setTimeout(() => {
+        container.style.transition = 'opacity 1s ease';
+        container.style.opacity = '1';
+    }, 100);
 });
