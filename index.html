@@ -6,15 +6,16 @@
     <title>تعزيز المهارات في حل النزاعات والمشاركة المجتمعية</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="animate__animated animate__fadeInDown">
             <h1>تعزيز المهارات في حل النزاعات والمشاركة المجتمعية</h1>
             <p class="date">نيسان 29-30 2025 | أربيل</p>
         </header>
 
-        <div class="button-container">
+        <div class="button-container animate__animated animate__fadeInUp">
             <button class="btn agenda">
                 <i class="fas fa-calendar-alt"></i>
                 الأجندة
@@ -29,7 +30,7 @@
             </button>
         </div>
 
-        <div class="resources-container">
+        <div class="resources-container animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
             <button class="btn video-resources">
                 <i class="fas fa-video"></i>
                 فيديوش جرافيت 2250
@@ -42,7 +43,7 @@
 
         <div class="sessions-grid">
             <!-- اليوم الأول - الجلسة الصباحية -->
-            <div class="session-card morning">
+            <div class="session-card morning animate__animated animate__zoomIn" style="animation-delay: 0.3s;">
                 <div class="session-header">
                     <div class="icon-container">
                         <i class="fas fa-sun"></i>
@@ -50,10 +51,13 @@
                     <h2>اليوم الأول - الجلسة الصباحية</h2>
                 </div>
                 <p class="session-content">الحوار وحل النزاعات وأجندة الشباب والأمن</p>
+                <div class="session-footer">
+                    <button class="details-btn">عرض التفاصيل <i class="fas fa-chevron-left"></i></button>
+                </div>
             </div>
 
             <!-- اليوم الأول - الجلسة المسائية -->
-            <div class="session-card evening">
+            <div class="session-card evening-1 animate__animated animate__zoomIn" style="animation-delay: 0.4s;">
                 <div class="session-header">
                     <div class="icon-container">
                         <i class="fas fa-moon"></i>
@@ -61,10 +65,13 @@
                     <h2>اليوم الأول - الجلسة المسائية</h2>
                 </div>
                 <p class="session-content">النزاعات المجتمعية وحلها</p>
+                <div class="session-footer">
+                    <button class="details-btn">عرض التفاصيل <i class="fas fa-chevron-left"></i></button>
+                </div>
             </div>
 
             <!-- اليوم الثاني - الجلسة الصباحية -->
-            <div class="session-card morning">
+            <div class="session-card morning animate__animated animate__zoomIn" style="animation-delay: 0.5s;">
                 <div class="session-header">
                     <div class="icon-container">
                         <i class="fas fa-sun"></i>
@@ -72,10 +79,13 @@
                     <h2>اليوم الثاني - الجلسة الصباحية</h2>
                 </div>
                 <p class="session-content">المشاركة المجتمعية والانخراط</p>
+                <div class="session-footer">
+                    <button class="details-btn">عرض التفاصيل <i class="fas fa-chevron-left"></i></button>
+                </div>
             </div>
 
             <!-- اليوم الثاني - الجلسة المسائية -->
-            <div class="session-card evening">
+            <div class="session-card evening-2 animate__animated animate__zoomIn" style="animation-delay: 0.6s;">
                 <div class="session-header">
                     <div class="icon-container">
                         <i class="fas fa-moon"></i>
@@ -83,10 +93,25 @@
                     <h2>اليوم الثاني - الجلسة المسائية</h2>
                 </div>
                 <p class="session-content">العمليات التشاركية وتنفيذ جدول أعمال الشباب والسلام والأمن</p>
+                <div class="session-footer">
+                    <button class="details-btn">عرض التفاصيل <i class="fas fa-chevron-left"></i></button>
+                </div>
             </div>
         </div>
 
-        <footer>
+        <!-- إضافة قسم رسالة المعلومات المنبثقة -->
+        <div id="modal" class="modal">
+            <div class="modal-content animate__animated animate__zoomIn">
+                <span class="close">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-content"></p>
+                <div class="modal-footer">
+                    <button class="btn close-btn">إغلاق</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
             <p>تم تطوير هذا الموقع بواسطة: عبدالرحمن كريم</p>
         </footer>
     </div>
