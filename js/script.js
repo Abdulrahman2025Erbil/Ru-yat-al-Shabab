@@ -54,10 +54,4 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
-
-    // تأثيرات تحميل تدريجي للصفحة
-    const elements = document.querySelectorAll('.session-card');
-    elements.forEach((element, index) => {
-        element.style.animationDelay = `${0.2 + (index * 0.1)}s`;
-    });
 });
